@@ -1,0 +1,400 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct llink{
+    int data;
+    struct llink *add;
+};
+
+
+void insert();
+void ddelete();
+void display();
+void d_first();
+void d_last();
+void d_any();
+
+struct llink *p1,*p2,*p3;
+
+void main()
+{
+    p1=NULL;
+    p2=NULL;
+    int ch;
+
+
+    while(1)
+    {
+        printf("1. insert\n2. delete\n3. display\n4. exit\n5. connect\n6. sort\nenter your choice :");
+
+        scanf("%d",&ch);
+        switch(ch)
+        {
+        case 1:
+            insert();
+            break;
+
+        case 2:
+            ddelete();
+            break;
+
+        case 3:
+            display();
+            break;
+
+        case 4:
+            exit(0);
+
+        case 5:
+            connect();
+            break;
+
+        case 6:
+            sort();
+            break;
+
+        default:
+            printf("enter proper choice : ");
+
+        }
+
+}
+}
+
+
+//-------------------------------------------------------------------------
+
+void insert()
+{
+    struct llink *temp1,*temp2,*k;int val,n;
+
+    printf("1. linked list 1:\n2. linked list 2:\nIn which linked list you want to insert : ");
+    scanf("%d",&n);
+
+    if(n==1)
+    {
+    printf("enter your value : ");
+    scanf("%d",&val);
+
+    k=(struct llink*)malloc(sizeof(struct llink));
+    k->data=val;
+    k->add=NULL;
+
+    if(p1==NULL)
+    {
+        p1=k;
+    }
+    else{
+
+    temp1=p1;
+    while(temp1->add!=NULL)
+    {
+        temp1=temp1->add;
+    }
+    temp1->add=k;
+
+    }
+    }
+    
+//----------------------------------------------------------
+
+    else{
+    printf("enter your value : ");
+    scanf("%d",&val);
+
+    k=(struct llink*)malloc(sizeof(struct llink));
+    k->data=val;
+    k->add=NULL;
+
+    if(p2==NULL)
+    {
+        p2=k;
+    }
+    else{
+
+    temp2=p2;
+
+    while(temp2->add!=NULL)
+    {
+        temp2=temp2->add;
+    }
+    temp2->add=k;
+
+    }
+
+}
+}
+
+//--------------------------------------------------------------------------------------
+
+void ddelete()
+{
+
+}
+
+//--------------------------------------------------------------------------------------------
+
+void display()
+{
+    struct llink *t,*t2;
+    int m;
+
+    printf("which linked list your want to display :\n1. list 1\n2. list 2\n3. list\n ");
+    scanf("%d",&m);
+
+    if(m==1)
+    {
+
+    if(p1==NULL)
+    {
+        printf("list is empty : \n");
+    }
+    else{
+        t=p1;
+        while(t->add!=NULL)
+        {
+            printf("%d \n",t->data);
+            //t=p;
+            t=t->add;
+
+        }
+        printf("%d\n",t->data);
+    }
+
+    }
+//----------------------------------------------------------------------------------------
+
+    else{
+        if(m==2)
+        {
+            if(p2==NULL)
+            {
+            printf("list is empty : \n");
+            }
+            else{
+                t2=p2;
+                while(t2->add!=NULL)
+                {
+                    printf("%d \n",t2->data);
+            //t=p;
+                    t2=t2->add;
+
+                }
+                printf("%d\n",t2->data);
+            }
+
+        }
+
+        else{
+
+            if(m==3)
+            {
+                if(p3==NULL)
+                {
+                printf("list is empty : \n");
+                }
+
+            else{
+                t=p3;
+            while(t->add!=NULL)
+                {
+                    printf("%d \n",t->data);
+            //t=p;
+                    t=t->add;
+
+                }
+                    printf("%d\n",t->data);
+                }
+            }
+
+
+        else{
+            printf("enter proper choice : ");
+        }
+    }
+    }
+}
+
+//-----------------------------------------------------------------------------------
+
+void connect()
+{
+
+    int l;
+    printf("1. connect in list 1 : \n2. connect in list 2 :\n3. connect in other list 3\nenter your choice : ");
+    scanf("%d",&l);
+
+    struct llink *temp;
+
+
+    if(l==1)
+    {
+
+    temp=p1;
+    while(temp->add!=NULL)
+    {
+        temp=temp->add;
+    }
+    temp->add=p2;
+
+    }
+
+    if(l==2)
+    {
+        temp=p2;
+        while(temp->add!=NULL)
+        {
+            temp=temp->add;
+        }
+        temp->add=p1;
+    }
+
+    if(l==3)
+    {
+        p3=p1;
+        temp=p3;
+        while(temp->add!=NULL)
+        {
+            temp=temp->add;
+        }
+        temp->add=p2;
+    }
+}
+
+//--------------------------------------------------------------------------------------
+
+void sort()
+{
+    struct llink *t1,*t2,*t3;int a,t4;
+
+        printf("1. first list\n2. second list\n3. third list\nenter your choice : ");
+        scanf("%d",&a);
+
+        if(a==1)
+        {
+
+        t1=p1;
+        t2=t1;
+
+        t1=t1->add;
+        t3=t1;
+
+
+        while(t2->add!=NULL)
+        {
+            if(t2->data<=t3->data)
+            {
+                t3=t3->add;
+            }
+            else{
+                if(t2->data>t3->data)
+                {
+                    t4=t3->data;
+                    t3->data=t2->data;
+                    t2->data=t4;
+                }
+
+            }
+
+             if(t3->add==NULL)
+                {
+                    if(t2->data>t3->data)
+                    {
+                        t4=t3->data;
+                        t3->data=t2->data;
+                        t2->data=t4;
+                    }
+                    t2=t2->add;
+                    t3=t2;
+                }
+
+
+        }
+        }
+//-----------------------------------------------------------------------
+        if(a==2)
+        {
+        t1=p2;
+        t2=t1;
+
+        t1=t1->add;
+        t3=t1;
+
+
+        while(t2->add!=NULL)
+        {
+            if(t2->data<=t3->data)
+            {
+                t3=t3->add;
+            }
+            else{
+                if(t2->data>t3->data)
+                {
+                    t4=t3->data;
+                    t3->data=t2->data;
+                    t2->data=t4;
+                }
+
+            }
+
+             if(t3->add==NULL)
+                {
+                    if(t2->data>t3->data)
+                    {
+                        t4=t3->data;
+                        t3->data=t2->data;
+                        t2->data=t4;
+                    }
+                    t2=t2->add;
+                    t3=t2;
+                }
+
+
+        }
+        }
+
+  //----------------------------------------------------------------------------------------
+        if(a==3)
+        {
+        t1=p3;
+        t2=t1;
+
+        t1=t1->add;
+        t3=t1;
+
+
+        while(t2->add!=NULL)
+        {
+            if(t2->data<=t3->data)
+            {
+                t3=t3->add;
+            }
+            else{
+                if(t2->data>t3->data)
+                {
+                    t4=t3->data;
+                    t3->data=t2->data;
+                    t2->data=t4;
+                }
+
+            }
+
+             if(t3->add==NULL)
+                {
+                    if(t2->data>t3->data)
+                    {
+                        t4=t3->data;
+                        t3->data=t2->data;
+                        t2->data=t4;
+                    }
+                    t2=t2->add;
+                    t3=t2;
+                }
+
+
+        }
+        }
+
+
+
+}
